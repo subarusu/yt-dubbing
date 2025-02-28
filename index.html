@@ -1,74 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Dubbing</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern YouTube Video Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-black flex justify-center items-center h-screen">
 
-  <div class="container mx-auto py-10 text-center">
-    <h1 class="text-4xl font-bold mb-5">YouTube Video Dubbing</h1>
-    <input id="youtube-url" type="text" class="p-2 rounded-md text-black" placeholder="Paste YouTube link here">
-    <button onclick="loadVideo()" class="p-2 bg-blue-500 rounded-md text-white ml-2">Play Video</button>
+    <div class="relative w-4/5 max-w-2xl rounded-lg overflow-hidden shadow-lg">
+        <!-- YouTube Iframe -->
+        <iframe id="youtube-video" 
+            class="w-full h-96 rounded-lg"
+            src="https://www.youtube.com/embed/jviPNrq3n6I?autoplay=1" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
 
-    <div id="player-container" class="mt-10">
-      <!-- YouTube Video Player akan dimuat di sini -->
+        <!-- Controls -->
+        <div class="absolute inset-0 flex justify-center items-center space-x-4 z-10">
+            <button id="play-pause" class="bg-black bg-opacity-60 text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition">Pause</button>
+            <button id="fullscreen" class="bg-black bg-opacity-60 text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition">Fullscreen</button>
+        </div>
     </div>
 
-    <!-- Tempat untuk menampilkan teks terjemahan -->
-    <div id="subtitle-container" class="mt-5 text-lg">
-      <p id="translated-text"></p>
-    </div>
-  </div>
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    // Fungsi untuk mengekstrak video ID dari URL (termasuk shortened URL)
-    function extractVideoId(url) {
-      let videoId = null;
-      const urlPattern = /(?:youtu.be\/|youtube.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/))([\w-]+)/;
-      const match = url.match(urlPattern);
-      if (match && match[1]) {
-        videoId = match[1]; // Mengambil ID video dari URL
-      }
-      return videoId;
-    }
-
-    // Fungsi untuk memuat video YouTube berdasarkan URL
-    function loadVideo() {
-      const url = document.getElementById("youtube-url").value;
-      const videoId = extractVideoId(url);  // Mengambil video ID dari URL
-
-      if (videoId) {
-        document.getElementById("player-container").innerHTML = `
-          <div id="player"></div>
-          <script>
-            var player;
-            function onYouTubeIframeAPIReady() {
-              player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: '${videoId}', // Memasukkan video ID ke dalam player
-                events: {
-                  'onReady': onPlayerReady,
-                  'onStateChange': onPlayerStateChange
-                }
-              });
-            }
-
-            function onPlayerReady(event) {
-              event.target.playVideo(); // Memulai video secara otomatis
-            }
-
-            function onPlayerStateChange(event) {
-              if (event.data == YT.PlayerState.ENDED) {
-                console.log('Video selesai diputar');
-              } else {
-                alert('URL YouTube tidak valid!');
-              }
-           }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
