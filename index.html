@@ -22,7 +22,7 @@
       <p id="translated-text"></p>
     </div>
   </div>
-
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     // Fungsi untuk mengekstrak video ID dari URL (termasuk shortened URL)
     function extractVideoId(url) {
@@ -64,16 +64,11 @@
             function onPlayerStateChange(event) {
               if (event.data == YT.PlayerState.ENDED) {
                 console.log('Video selesai diputar');
+              } else {
+                alert('URL YouTube tidak valid!');
               }
-            }
-          </script>
-          <script src="https://www.youtube.com/iframe_api"></script>
-        `;
-      } else {
-        alert('URL YouTube tidak valid!');
-      }
-    }
-  </script>
+           }
+    </script>
 
 </body>
 </html>
