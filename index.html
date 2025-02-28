@@ -14,8 +14,10 @@
     <button onclick="loadVideo()" class="p-2 bg-blue-500 rounded-md text-white ml-2">Play Video</button>
 
     <div id="player-container" class="mt-10">
+      <!-- YouTube Video Player akan dimuat di sini -->
     </div>
 
+    <!-- Tempat untuk menampilkan teks terjemahan -->
     <div id="subtitle-container" class="mt-5 text-lg">
       <p id="translated-text"></p>
     </div>
@@ -40,12 +42,15 @@
         <script src="https://www.youtube.com/iframe_api"></script>
       `;
     }
-    
+
+    // Fungsi untuk menampilkan teks terjemahan (sementara menggunakan teks statis)
     function showTranslatedText(text) {
       document.getElementById("translated-text").innerText = text;
     }
 
+    // Hasil terjemahan dari backend.
     function translateText(text) {
+      // Sementara hanya menerjemahkan teks statis
       showTranslatedText("Halo, apa kabar? Ini adalah contoh teks terjemahan.");
     }
   </script>
